@@ -56,25 +56,13 @@ class SQLiteDbProvider {
       onCreate: (Database db, int version) async {
         await db.execute("CREATE TABLE Date ("
               "id INTEGER PRIMARY KEY,"
-              "name TEXT,"
+              "date TEXT,"
               "calories INTEGER"
         ")");
       }
     );
   }
 
-  Future<List<Date>> getAllFoods() async {
-    final db = await database;
-
-    List<Map> results = await db.query("Date", columns: Date.columns, orderBy: "id ASC");
-
-    List<Date> dates = [];
-    results.forEach((result) { 
-      Date date = Date.fromMap(result);
-      dates.add(date);
-    });
-    return dates;
-  }
 
    insert(Date date) async { 
       final db = await database; 
